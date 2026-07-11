@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
 import PricingSection from "@/components/PricingSection";
+import { PricingTable } from "@clerk/nextjs";
 
 interface MockUIProps {
   rows?: number;
@@ -358,6 +359,15 @@ export default function LandingPage() {
           </p>
         </div>
 
+        {/* <PricingTable checkoutProps={{
+          appearance: {
+            elements: {
+              drawerRoot: {
+                zIndex:2000
+              }
+            }
+          }
+        }} /> */}
         <PricingSection />
       </section>
 

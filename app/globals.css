@@ -125,3 +125,10 @@
     scroll-behavior: smooth;
   }
 }
+
+.cl-pricingTableCardBox,
+[class*="cl-internal"][class*="pricingTable"] {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 1.25rem !important;
+}
