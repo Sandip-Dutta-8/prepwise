@@ -3,6 +3,8 @@ import { Button } from './ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { checkUser } from '@/lib/checkUser'
+import { CalendarDays, Users } from 'lucide-react'
+import CreditButton from './creditButton'
 
 const Header = async () => {
 
@@ -20,7 +22,7 @@ const Header = async () => {
                 />
             </Link>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
                 <Show when="signed-out">
                     <SignInButton>
                         <Button variant="ghost">
@@ -32,6 +34,37 @@ const Header = async () => {
                     </SignUpButton>
                 </Show>
                 <Show when="signed-in">
+                    {user?.role === "INTERVIEWER" && (
+                        <Button variant="ghost">
+                            <Link href="/dashboard">Dashboard</Link>
+                        </Button>
+                    )}
+
+                    {user?.role === "INTERVIEWEE" && (
+                        <>
+                            <Button variant="ghost">
+                                <Link href="/explore" className='flex justify-center items-center gap-1.5'>
+                                    <Users size={16} />
+                                    <span className="hidden md:inline">Explore</span>
+                                </Link>
+                            </Button>
+                            <Button variant="default">
+                                <Link href="/appointments" className='flex justify-center items-center gap-1.5'>
+                                    <CalendarDays size={16} />
+                                    <span className="hidden md:inline">My Appointments</span>
+                                </Link>
+                            </Button>
+                        </>
+                    )}
+
+                    <CreditButton
+                        role={user?.role === "INTERVIEWER" ? "INTERVIEWER" : "INTERVIEWEE"}
+                        credits={
+                            (user?.role === "INTERVIEWER"
+                                ? user?.creditBalance
+                                : user?.credits) ?? 0
+                        }
+                    />
                     <UserButton />
                 </Show>
             </div>

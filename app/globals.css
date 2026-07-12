@@ -126,9 +126,111 @@
   }
 }
 
-.cl-pricingTableCardBox,
-[class*="cl-internal"][class*="pricingTable"] {
+/* pricing-table.css */
+
+/* ── Responsive grid ── */
+.pricing-table-wrap .cl-pricingTable {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-  gap: 1.25rem !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 1.5rem !important;
+  align-items: stretch !important;
+}
+
+@media (max-width: 1024px) {
+  .pricing-table-wrap .cl-pricingTable {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-table-wrap .cl-pricingTable {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Card ── */
+.pricing-table-wrap .cl-pricingTableCard {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  overflow: visible !important;
+  padding-bottom: 5.5rem !important;
+  /* reserve space so content never sits under the footer */
+  background: #0f0f11 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem !important;
+  box-shadow: none !important;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.pricing-table-wrap .cl-pricingTableCard:hover {
+  border-color: rgba(251, 191, 36, 0.2) !important;
+  transform: translateY(-4px);
+}
+
+/* Title / description */
+.pricing-table-wrap .cl-pricingTableCardTitle {
+  font-size: 1.25rem !important;
+  color: #f5f5f4 !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardDescription {
+  color: #a8a29e !important;
+}
+
+/* Price row */
+.pricing-table-wrap .cl-pricingTableCardFeeContainer,
+.pricing-table-wrap [class*="pricingTableCardFee"] {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline !important;
+  gap: 0.25rem !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFee {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+  font-weight: 600;
+  color: #fbbf24 !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFeePeriod,
+.pricing-table-wrap .cl-pricingTableCardFeePeriodNotice {
+  font-size: 0.875rem !important;
+  color: #78716c !important;
+}
+
+/* Feature list */
+.pricing-table-wrap .cl-pricingTableCardFeatures,
+.pricing-table-wrap .cl-pricingTableCardFooter {
+  padding: 0 1.5rem 1.5rem !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFeaturesListItem {
+  font-size: 0.875rem !important;
+  color: #a8a29e !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFooter {
+  position: absolute !important;
+  left: 1.5rem !important;
+  right: 1.5rem !important;
+  bottom: 1.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFooterButton,
+.pricing-table-wrap .cl-formButtonPrimary {
+  width: 100% !important;
+  background: #fbbf24 !important;
+  color: #0a0a0b !important;
+  font-weight: 600 !important;
+  border-radius: 0.5rem !important;
+}
+
+.pricing-table-wrap .cl-pricingTableCardFooterButton:hover,
+.pricing-table-wrap .cl-formButtonPrimary:hover {
+  background: #fcd34d !important;
 }
