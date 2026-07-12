@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { checkUser } from '@/lib/checkUser'
 import { CalendarDays, Users } from 'lucide-react'
 import CreditButton from './creditButton'
+import RoleRedirect from './roleRedirect'
 
 const Header = async () => {
 
@@ -21,6 +22,8 @@ const Header = async () => {
                     className="h-11 w-auto"
                 />
             </Link>
+
+            {user && <RoleRedirect role={user.role} />}
 
             <div className="flex items-center gap-2 sm:gap-3">
                 <Show when="signed-out">

@@ -107,7 +107,7 @@ export default function LandingPage() {
 
         {/* LEFT */}
         <div className="col-span-full lg:col-span-3 flex flex-col items-center justify-center text-center lg:-rotate-2">
-          <Badge variant="gold">Powered by AI — Now in Beta</Badge>
+          <Badge variant="gold">Powered by AI</Badge>
 
           <h1 className="font-serif relative text-5xl sm:text-6xl lg:text-7xl tracking-tighter max-w-4xl">
             <GrayTitle>Ace your next interview</GrayTitle>
@@ -158,7 +158,7 @@ export default function LandingPage() {
               <strong className="text-stone-400 font-medium">
                 2,400+ engineers
               </strong>{" "}
-              cracked FAANG interviews via Prept
+              cracked MAANG interviews via Prepwise
             </p>
           </div>
         </div>
@@ -358,16 +358,6 @@ export default function LandingPage() {
             Each credit = one session. Unused credits roll over.
           </p>
         </div>
-
-        {/* <PricingTable checkoutProps={{
-          appearance: {
-            elements: {
-              drawerRoot: {
-                zIndex:2000
-              }
-            }
-          }
-        }} /> */}
         <PricingSection />
       </section>
 
@@ -383,7 +373,7 @@ export default function LandingPage() {
           </h2>
 
           <p className="relative text-stone-400 font-light text-sm mb-11">
-            Join thousands of engineers already levelling up on Prept.
+            Join thousands of engineers already levelling up on Prepwise.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
