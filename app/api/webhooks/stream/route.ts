@@ -147,9 +147,6 @@ export async function POST(request: NextRequest): Promise<Response> {
                 throw new Error("Missing GEMINI_API_KEY environment variable");
             }
 
-            // Free-tier, GA Gemini model — see the note in actions/aiQuestions.ts
-            // about model naming; verify at
-            // https://ai.google.dev/gemini-api/docs/models before changing.
             const GEMINI_MODEL = "gemini-2.5-flash-lite";
 
             const genAI = new GoogleGenerativeAI(apiKey);
