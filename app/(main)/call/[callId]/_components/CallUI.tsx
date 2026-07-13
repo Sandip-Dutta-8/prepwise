@@ -25,15 +25,12 @@ import {
 import "stream-chat-react/dist/css/index.css";
 
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, Loader2 } from "lucide-react";
+import { MessageSquare, Sparkles, Loader2 } from "lucide-react";
+import { CATEGORY_LABEL } from "@/lib/data";
+import AIQuestionsPanel from "./AiQuestions";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
-/**
- * Minimal booking shape this component needs. Mirrors the relevant fields
- * from `GetCallDataSuccess["booking"]` (see the `getCallData` server
- * action) — adjust the import if that type lives elsewhere in your project.
- */
 export interface CallBookingParty {
     clerkUserId: string;
     name: string | null;
@@ -66,6 +63,10 @@ interface CallUIProps {
     currentUser: CallUICurrentUser;
 }
 
+type SidePanelTab = "chat" | "ai";
+
+const ALL_CATEGORIES = Object.keys(CATEGORY_LABEL) as (keyof typeof CATEGORY_LABEL)[];
+
 // ─── Call UI (inside StreamCall context) ─────────────────────────────────────
 
 export default function CallUI({
@@ -80,6 +81,8 @@ export default function CallUI({
     const { useCallCallingState } = useCallStateHooks();
     const call = useCall();
     const callingState = useCallCallingState();
+
+    const [activeTab, setActiveTab] = useState<SidePanelTab>("chat");
 
     // Auto-stop recording before leaving
     const handleLeave = useCallback(async () => {
@@ -174,27 +177,56 @@ export default function CallUI({
                     </StreamTheme>
                 </div>
 
-                {/* ── RIGHT: Chat panel ── */}
+                {/* ── RIGHT: Chat / AI Questions panel ── */}
                 <div className="w-85 shrink-0 flex flex-col border-l border-white/8 bg-[#0a0a0b]">
-                    <div className="flex items-center justify-center gap-2 py-3 border-b border-white/8 shrink-0 text-xs font-medium text-amber-400">
-                        <MessageSquare size={13} />
-                        Chat
+                    {/* Tab switcher — the AI Questions tab only renders for interviewers */}
+                    <div className="flex items-center border-b border-white/8 shrink-0">
+                        <button
+                            type="button"
+                            onClick={() => setActiveTab("chat")}
+                            className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-medium transition-colors ${activeTab === "chat"
+                                    ? "text-amber-400"
+                                    : "text-stone-500 hover:text-stone-400"
+                                }`}
+                        >
+                            <MessageSquare size={13} />
+                            Chat
+                        </button>
+                        {isInterviewer && (
+                            <button
+                                type="button"
+                                onClick={() => setActiveTab("ai")}
+                                className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-medium transition-colors ${activeTab === "ai"
+                                        ? "text-amber-400"
+                                        : "text-stone-500 hover:text-stone-400"
+                                    }`}
+                            >
+                                <Sparkles size={13} />
+                                AI Questions
+                            </button>
+                        )}
                     </div>
 
                     {/* Panel content */}
                     <div className="flex-1 min-h-0 overflow-hidden">
-                        {chatClient && chatChannel ? (
-                            <Chat client={chatClient} theme="str-chat__theme-dark">
-                                <Channel channel={chatChannel}>
-                                    <Window>
-                                        <MessageList />
-                                        <MessageComposer focus />
-                                    </Window>
-                                </Channel>
-                            </Chat>
+                        {activeTab === "chat" || !isInterviewer ? (
+                            chatClient && chatChannel ? (
+                                <Chat client={chatClient} theme="str-chat__theme-dark">
+                                    <Channel channel={chatChannel}>
+                                        <Window>
+                                            <MessageList />
+                                            <MessageComposer focus />
+                                        </Window>
+                                    </Channel>
+                                </Chat>
+                            ) : (
+                                <div className="flex items-center justify-center h-full">
+                                    <Loader2 size={18} className="text-stone-600 animate-spin" />
+                                </div>
+                            )
                         ) : (
-                            <div className="flex items-center justify-center h-full">
-                                <Loader2 size={18} className="text-stone-600 animate-spin" />
+                            <div className="h-full overflow-hidden p-3">
+                                <AIQuestionsPanel categories={ALL_CATEGORIES} />
                             </div>
                         )}
                     </div>

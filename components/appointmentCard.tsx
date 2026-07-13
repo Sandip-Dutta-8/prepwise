@@ -213,7 +213,7 @@ export function AppointmentCard({
                     <div className="flex items-center gap-2 flex-wrap pt-1">
                         {!isPast && streamCallId && isUpcoming && (
                             <Button variant="gold" size="sm" className="gap-2">
-                                <Link href={`/call/${streamCallId}`}>
+                                <Link href={`/call/${streamCallId}`} className="flex items-center gap-2">
                                     <Video size={13} />
                                     Join call
                                 </Link>
