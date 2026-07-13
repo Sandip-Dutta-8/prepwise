@@ -150,7 +150,7 @@ export default function SlotPicker({
 
                     {/* Date tabs */}
                     <div className="flex gap-2 overflow-x-auto pb-0.5 scrollbar-none -mx-1 px-1">
-                        {dates.map((date : any) => {
+                        {dates.map((date: Date) => {
                             const label = formatDateTab(date);
                             const active =
                                 date.toDateString() === selectedDate.toDateString();
@@ -160,8 +160,8 @@ export default function SlotPicker({
                                     type="button"
                                     onClick={() => handleDateChange(date)}
                                     className={`shrink-0 flex flex-col items-center px-3.5 py-2.5 rounded-xl border text-xs transition-all duration-200 ${active
-                                            ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
-                                            : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
+                                        ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
+                                        : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
                                         }`}
                                 >
                                     <span className="font-medium">{label.top}</span>
@@ -197,10 +197,10 @@ export default function SlotPicker({
                                         disabled={slot.isBooked}
                                         onClick={() => handleSlotClick(slot)}
                                         className={`relative text-xs px-2 py-2.5 rounded-xl border transition-all duration-200 ${isSelected
-                                                ? "border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.08)]"
-                                                : slot.isBooked
-                                                    ? "border-white/5 bg-white/2 text-stone-700 cursor-not-allowed"
-                                                    : "border-white/10 text-stone-400 hover:border-amber-400/30 hover:text-amber-400 hover:bg-amber-400/5 cursor-pointer"
+                                            ? "border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.08)]"
+                                            : slot.isBooked
+                                                ? "border-white/5 bg-white/2 text-stone-700 cursor-not-allowed"
+                                                : "border-white/10 text-stone-400 hover:border-amber-400/30 hover:text-amber-400 hover:bg-amber-400/5 cursor-pointer"
                                             }`}
                                     >
                                         {formatTime(slot.startTime)}

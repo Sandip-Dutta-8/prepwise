@@ -7,6 +7,8 @@ interface UseIsInViewOptions {
     inViewMargin?: string;
 }
 
+type UseInViewConfig = NonNullable<Parameters<typeof useInView>[1]>;
+
 function useIsInView<T extends HTMLElement = HTMLElement>(
     ref: React.ForwardedRef<T>,
     options: UseIsInViewOptions = {}
@@ -18,7 +20,7 @@ function useIsInView<T extends HTMLElement = HTMLElement>(
 
     const inViewResult = useInView(localRef, {
         once: inViewOnce,
-        margin: inViewMargin as any,
+        margin: inViewMargin as UseInViewConfig["margin"],
     });
 
     const isInView = !inView || inViewResult;
