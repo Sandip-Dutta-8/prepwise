@@ -194,7 +194,7 @@ export default function AvailabilitySection({
             <div className="flex items-center gap-3">
                 <Button
                     variant="gold"
-                    disabled={!hasWindow || !loading || !deleting}
+                    disabled={!hasWindow || Boolean(loading) || Boolean(deleting)}
                     onClick={handleSave}
                     className="self-start"
                 >
@@ -210,7 +210,7 @@ export default function AvailabilitySection({
                 {exists && (
                     <Button
                         variant="outline"
-                        disabled={!loading || !deleting}
+                        disabled={Boolean(loading || deleting)}
                         onClick={handleDelete}
                         className="self-start gap-2 border-red-500/20 text-red-400 hover:bg-red-500/10 hover:text-red-400"
                     >

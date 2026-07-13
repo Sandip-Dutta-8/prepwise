@@ -344,13 +344,13 @@ export default function EarningsSection({ stats, history }: EarningsSectionProps
                                 <Button
                                     variant="outline"
                                     onClick={() => handleOpenChange(false)}
-                                    disabled={!loading}
+                                    disabled={Boolean(loading)}
                                 >
                                     Cancel
                                 </Button>
                                 <Button
                                     variant="gold"
-                                    disabled={!isValid || !loading}
+                                    disabled={!isValid || Boolean(loading)}
                                     onClick={() =>
                                         withdrawFn({
                                             credits: stats?.creditBalance ?? 0,
