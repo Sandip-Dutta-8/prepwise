@@ -9,7 +9,6 @@ import { Resend } from "resend";
 import { WithdrawalRequestEmail } from "@/emails/WithdrawalRequestEmail";
 import { render } from "@react-email/render";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN_EMAIL = "sandipdutta944@gmail.com";
 
 const withdrawalLimiter = createRateLimiter({
@@ -222,6 +221,10 @@ export const requestWithdrawal = async ({
 
         // Fire admin email — non-blocking, failure won't affect the user
         try {
+            if (!process.env.RESEND_API_KEY) {
+                throw new Error("RESEND_API_KEY is not configured");
+            }
+            const resend = new Resend(process.env.RESEND_API_KEY);
             const reviewUrl = `${process.env.NEXT_PUBLIC_APP_URL}/payout/${payout.id}`;
             const html = await render(
                 WithdrawalRequestEmail({
