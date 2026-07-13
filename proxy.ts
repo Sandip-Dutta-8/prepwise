@@ -50,9 +50,10 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
-    // Run on the Node.js runtime (not Edge) so Arcjet's bot-detection
-    // WASM module resolves correctly under Turbopack.
-    runtime: "nodejs",
+    // Note: as of Next.js 16, proxy.ts always runs on the Node.js runtime.
+    // Specifying `runtime` here (route segment config) is no longer allowed
+    // and will fail the build with "Route segment config is not allowed in
+    // Proxy file". See https://nextjs.org/docs/messages/middleware-to-proxy
     matcher: [
         // Skip Next.js internals and all static files, unless found in search params
         '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
