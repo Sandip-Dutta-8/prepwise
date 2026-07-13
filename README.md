@@ -157,7 +157,3 @@ PrepWise is deployed on **Vercel**, with automatic deployments triggered on push
 **Sandip Dutta**
 - GitHub: [@Sandip-Dutta-8](https://github.com/Sandip-Dutta-8)
 - LinkedIn: [Sandip](https://www.linkedin.com/in/sandip-dutta-50415b25a/)
-
----
-
-*Built as part of the House of Edtech Fullstack Developer assignment (Jan 2026).*
