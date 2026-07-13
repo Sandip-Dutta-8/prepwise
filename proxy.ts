@@ -9,6 +9,8 @@ const isProtectedRoute = createRouteMatcher([
     "/onboarding(.*)",
 ]);
 
+const isWebhookRoute = createRouteMatcher(["/api/webhooks/stream(.*)"]);
+
 function requireEnv(name: string): string {
     const value = process.env[name];
     if (!value) {
@@ -29,10 +31,12 @@ const aj = arcjet({
 });
 
 export default clerkMiddleware(async (auth, req) => {
-    const decision = await aj.protect(req);
 
-    if (decision.isDenied()) {
-        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (!isWebhookRoute(req)) {
+        const decision = await aj.protect(req);
+        if (decision.isDenied()) {
+            return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+        }
     }
 
     const { userId } = await auth();
