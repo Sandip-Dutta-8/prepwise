@@ -39,7 +39,7 @@ export default function AIQuestionsPanel({ categories }: AIQuestionsPanelProps) 
     const questions = data?.questions ?? [];
 
     return (
-        <div className="flex flex-col gap-4 h-screen overflow-hidden">
+        <div className="flex flex-col gap-4 h-full overflow-hidden">
             {/* Category selector */}
             <div className="flex flex-wrap gap-1.5">
                 {categories?.map((cat) => (
@@ -48,8 +48,8 @@ export default function AIQuestionsPanel({ categories }: AIQuestionsPanelProps) 
                         type="button"
                         onClick={() => setSelectedCategory(cat)}
                         className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${selectedCategory === cat
-                                ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
-                                : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
+                            ? "border-amber-400/40 bg-amber-400/10 text-amber-400"
+                            : "border-white/10 text-stone-500 hover:border-white/20 hover:text-stone-400"
                             }`}
                     >
                         {CATEGORY_LABEL[cat] ?? cat}
